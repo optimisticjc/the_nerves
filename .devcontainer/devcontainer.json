@@ -1,40 +1,58 @@
-
-// For format details, see https://aka.ms/devcontainer.json. For config options, see the
-// README at: https://github.com/devcontainers/templates/tree/main/src/javascript-node
+// For format details, see https://aka.ms/devcontainer.json. For config options, see the README at:
+// https://github.com/microsoft/vscode-dev-containers/tree/v0.245.0/containers/python-3-miniconda
 {
-	"name": "Node.js",
-	// Or use a Dockerfile or Docker Compose file. More info: https://containers.dev/guide/dockerfile
-	"image": "mcr.microsoft.com/devcontainers/javascript-node:0-18-bullseye",
+	"name": "Python Data Viz Workshop",
 
-	// Features to add to the dev container. More info: https://containers.dev/features.
-	// "features": {},
+	"hostRequirements": {
+		"cpus": 2,
+		"memory": "2gb",
+		"storage": "2gb"
+	},
+
+	"build": {
+		"context": "..",
+		"dockerfile": "Dockerfile"
+	},
 
 	// Configure tool-specific properties.
 	"customizations": {
+
+		// Configure how codespaces will open
+		"codespaces": {
+			"openFiles": [
+				".devcontainer/README.md"
+			]
+		},
+
 		// Configure properties specific to VS Code.
 		"vscode": {
-			"settings": {},
+			// Set *default* container specific settings.json values on container create.
+			"settings": {
+				"python.defaultInterpreterPath": "/home/vscode/.conda/envs/data_viz_workshop"
+			},
+
+			// Add the IDs of extensions you want installed when the container is created.
 			"extensions": [
-				"streetsidesoftware.code-spell-checker"
+				"ms-python.python",
+				"ms-python.vscode-pylance",
+				"ms-toolsai.jupyter"
 			]
 		}
 	},
 
 	// Use 'forwardPorts' to make a list of ports inside the container available locally.
-	// "forwardPorts": [3000],
-
-	// Use 'portsAttributes' to set default properties for specific forwarded ports. 
-	// More info: https://containers.dev/implementors/json_reference/#port-attributes
-	"portsAttributes": {
-		"9000": {
-			"label": "Hello Remote World",
-			"onAutoForward": "notify"
-		}
-	},
+	// "forwardPorts": [],
 
 	// Use 'postCreateCommand' to run commands after the container is created.
-	"postCreateCommand": "yarn install"
+	// "postCreateCommand": "",
 
-	// Uncomment to connect as root instead. More info: https://aka.ms/dev-containers-non-root.
-	// "remoteUser": "root"
+	// Comment out to connect as root instead. More info: https://aka.ms/vscode-remote/containers/non-root.
+	"remoteUser": "vscode",
+
+	"features": {
+        "ghcr.io/devcontainers/features/python:1": {
+            "installJupyterlab": "true",
+			"configureJupyterlabAllowOrigin": "*"
+        }
+	}
 }
